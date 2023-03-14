@@ -28,13 +28,15 @@ $user = $burger->getUserByEmail($email);
 if ($user){
 	$userId = $user['ID'];
 	$burger->incOrders($user['ID']);
+	$orderNumber = $user['Count_Order'] + 1;
 } else {
+	$orderNumber = 1;
 	$userId = $burger->createUser($email, $name, $phone, $comment);
 }
 
-$burger->addOrder($userId, $address);
+$orderID = $burger->addOrder($userId, $address);
 echo "Спасибо, ваш заказ будет доставлен по адресу: $address <br>
-Номер вашего заказа: #ID <br>
-Это ваш #Count_Order заказ";
+Номер вашего заказа: #$orderID <br>
+Это ваш #$orderNumber заказ";
 
 
